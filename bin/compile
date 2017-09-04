@@ -25,8 +25,8 @@ function vendor() {
 
   echo "Fetching $binary" | indent
   mkdir -p $path
-  #curl $binary -s -o - | tar xz -C $path -f -
-  tar -zxvf $binary -C $path
+  curl $binary -s -o - | tar xz -C $path -f -
+  #tar -zxvf $binary -C $path
 
   [ -d "$path/bin" ] && export PATH=$path/bin:$PATH
   export CPPPATH="$path/include:$CPPPATH"
@@ -42,7 +42,9 @@ echo "-----> Vendoring binaries"
 #vendor "https://s3.amazonaws.com/mojodna-heroku/boost-1_49_0-2.tar.gz"   "$BUILD_DIR/vendor/boost"
 #vendor "https://s3.amazonaws.com/mojodna-heroku/protobuf-2.5.0-1.tar.gz" "$BUILD_DIR/vendor/protobuf"
 
-vendor "protobuf-2.6.1.tar.gz" "$BUILD_DIR/vendor/protobuf"
+#vendor "protobuf-2.6.1.tar.gz" "$BUILD_DIR/vendor/protobuf"
+
+vendor "https://s3.ca-central-1.amazonaws.com/dallaire-heroku/protobuf-2.6.1.tar.gz" "$BUILD_DIR/vendor/protobuf"
 
 echo "-----> Configuring build environment"
 
